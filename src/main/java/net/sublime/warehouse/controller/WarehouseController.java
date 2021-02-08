@@ -41,7 +41,7 @@ public class WarehouseController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public ResponseEntity<Product> addProduct(@RequestBody Product product) {
         warehouseService.addProduct(product);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 
