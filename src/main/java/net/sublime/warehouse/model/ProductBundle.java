@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Map;
 
 @Getter
 @Setter
@@ -15,6 +14,12 @@ public class ProductBundle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
 
-    @ElementCollection
-    Map<Long ,Long> productDetails;
+    @Column(nullable = false)
+    private String productName;
+    @Column(nullable = false)
+    private Long price;
+    @Column(nullable = false)
+    private Long count;
+
+
 }

@@ -29,9 +29,11 @@ public class OrderController {
     @PostMapping("/create")
     public ResponseEntity<Order> newOrder(@RequestBody ProductBundle... productBundle) {
         Order order = new Order();
-        // TODO: 2/9/2021 Check if all products has correct id
-        System.out.println("All products are exist");
-
+        List<String> productBundleList = Arrays.stream(productBundle).map(ProductBundle::getProductName).collect(Collectors.toList());
+        List<String> names = productService.getAllProducts().stream().map(Product::getName).collect(Collectors.toList());
+        if(names.containsAll(productBundleList)) {
+            System.out.println("All products are exist");
+        }
 
         order.getProductBundle().addAll(Arrays.stream(productBundle).collect(Collectors.toSet()));
          orderService.save(order);

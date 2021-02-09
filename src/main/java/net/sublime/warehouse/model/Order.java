@@ -1,5 +1,6 @@
 package net.sublime.warehouse.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "order_list")
+
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
