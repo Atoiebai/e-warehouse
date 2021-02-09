@@ -1,14 +1,16 @@
-package net.sublime.warehouse.service;
+package net.sublime.warehouse.service.product;
 
 import net.sublime.warehouse.model.Product;
 
 import java.util.List;
 
-public interface WarehouseService {
+public interface ProductService {
 
     List<Product> getAllProducts();
 
     List<Product> getAllAvailableProducts();
+
+    List<Long> getAllId();
 
     Product getProduct(long id);
 

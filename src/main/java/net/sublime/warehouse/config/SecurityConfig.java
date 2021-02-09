@@ -20,25 +20,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-//                .anyRequest()
-//                .authenticated()
-                .antMatchers("/api/catalog/**")
-                .permitAll()
-//                .and()
-//                .formLogin()
-
+                .anyRequest()
+                .authenticated()
+                .and()
+                .httpBasic()
         ;
     }
 
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//        var user = User
-//                .withUsername("admin")
-//                .passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder()::encode)
-//                .password("admin")
-//                .roles("ADMIN")
-//                .build();
-//        return new InMemoryUserDetailsManager(user);
-//    }
+    @Bean
+    @Override
+    public UserDetailsService userDetailsService() {
+        var user = User
+                .withUsername("admin")
+                .passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder()::encode)
+                .password("admin")
+                .roles("ADMIN")
+                .build();
+        return new InMemoryUserDetailsManager(user);
+    }
 }
