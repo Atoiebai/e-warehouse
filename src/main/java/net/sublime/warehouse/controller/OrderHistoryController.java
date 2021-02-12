@@ -25,16 +25,13 @@ public class OrderHistoryController {
 
     @GetMapping
     public ResponseEntity<List<Order>> getOrders(
-                                                 @RequestParam(required = false) Integer limit,
-                                                 @RequestParam(required = false) Integer offset,
+                                                 @RequestParam(required = false) Integer page,
+                                                 @RequestParam(required = false) Integer size,
                                                  @RequestParam(required = false) String dateFrom,
                                                  @RequestParam(required = false) String dateTo) {
 
-        int  limitN, offsetN;
         Date from, to;
 
-        limitN = limit == null ? 0 : limit;
-        offsetN = offset == null ? 0 : offset;
         try {
             from = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").parse(dateFrom);
             to = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").parse(dateTo);
@@ -47,10 +44,10 @@ public class OrderHistoryController {
 
         Date finalFrom = from;
         Date finalTo = to;
+
         return new ResponseEntity<>(
-                orderService.getAll(limitN,offsetN - limitN)
+                orderService.getAll(page,size)
                         .stream()
-                        .skip(limitN)
                         .filter(x -> x.getCreatedAt().after(finalFrom))
                         .filter(x -> x.getCreatedAt().before(finalTo))
                         .collect(Collectors.toList())

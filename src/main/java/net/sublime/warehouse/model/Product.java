@@ -27,7 +27,6 @@ public class Product {
     @Column(nullable = false)
     long price;
 
-
     @JsonIgnore
     @Column(nullable = false)
     boolean archived = false;
