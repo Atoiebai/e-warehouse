@@ -24,6 +24,9 @@ public class Product {
     @Column(nullable = false)
     String name;
 
+    @Column(nullable = false)
+    long price;
+
     @JsonIgnore
     @Column(nullable = false)
     boolean archived = false;
