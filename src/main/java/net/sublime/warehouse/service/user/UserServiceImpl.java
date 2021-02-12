@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void deleteUser(long id) {
-         userRepository.deleteById(id);
+        userRepository.deleteById(id);
     }
 
     @Override

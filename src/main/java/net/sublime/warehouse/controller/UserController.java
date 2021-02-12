@@ -17,7 +17,7 @@ public class UserController {
     public ResponseEntity<Object> registerUser(
             @RequestBody User user,
             BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (bindingResult.hasErrors()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

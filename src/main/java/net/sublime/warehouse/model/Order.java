@@ -15,6 +15,7 @@ import java.util.List;
 @Table(name = "order_list")
 
 public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -25,5 +26,7 @@ public class Order {
     @OneToMany(cascade = CascadeType.ALL)
     List<ProductBundle> productBundle = new ArrayList<>();
 
+    @Column(nullable = false)
+    double totalPrice;
 
 }

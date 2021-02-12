@@ -3,6 +3,9 @@ package net.sublime.warehouse.service.product;
 import lombok.AllArgsConstructor;
 import net.sublime.warehouse.model.Product;
 import net.sublime.warehouse.reposirtory.ProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +20,14 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getAllProducts() {
         return productRepository.findAll();
+    }
+
+    @Override
+    public List<Product> getAllProducts(int number, int size) {
+        Pageable pageable = PageRequest.of(number , size);
+        Page<Product> productsResult = productRepository.findAll(pageable);
+
+        return productsResult.toList();
     }
 
     @Override
