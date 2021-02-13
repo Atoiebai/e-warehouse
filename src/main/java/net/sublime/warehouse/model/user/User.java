@@ -1,4 +1,4 @@
-package net.sublime.warehouse.model;
+package net.sublime.warehouse.model.user;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +11,7 @@ import java.util.Collection;
 @Entity
 @Getter
 @Setter
-public class User implements UserDetails {
+public class User implements UserDetails  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,18 +20,19 @@ public class User implements UserDetails {
     private String email;
     @Column(nullable = false)
     private String password;
-    @Transient
-    private String confirmPass;
     @Column(nullable = false)
     private String firstName;
     @Column(nullable = false)
     private String secondName;
     @Column(nullable = false)
     private boolean isActive;
+    @Column
+    @Enumerated(EnumType.STRING)
+    Role role = Role.ADMIN;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return role.getAuthorities();
     }
 
     @Override
