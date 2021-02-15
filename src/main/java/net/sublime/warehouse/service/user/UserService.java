@@ -1,6 +1,6 @@
 package net.sublime.warehouse.service.user;
 
-import net.sublime.warehouse.model.User;
+import net.sublime.warehouse.model.user.User;
 
 import java.util.List;
 

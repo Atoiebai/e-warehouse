@@ -1,8 +1,10 @@
 package net.sublime.warehouse.config;
 
 import lombok.AllArgsConstructor;
+
 import net.sublime.warehouse.jwt.JwtTokenVerifier;
 import net.sublime.warehouse.jwt.JwtUsernameAndPasswordAuthenticationFilter;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -22,9 +24,11 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
+
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -37,9 +41,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager()))
                 .addFilterAfter(new JwtTokenVerifier(), JwtUsernameAndPasswordAuthenticationFilter.class)
                 .authorizeRequests()
+                .antMatchers("/users")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
+
+
         ;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(12);
     }
 
     @Bean
@@ -60,6 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12);
     }
@@ -69,6 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+
         return daoAuthenticationProvider;
     }
 }
